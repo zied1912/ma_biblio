@@ -5,6 +5,7 @@ import 'models/livre.dart';
 import 'data/livres_data.dart';
 import 'screens/parametres_screen.dart';
 import 'screens/catalogue_screen.dart';
+import 'screens/ma_liste_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +36,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  // Q1.7 : fonction représentant un livre avec un ListTile.
+  
   Widget livreTile(Livre livre) {
     return ListTile(
       leading: CircleAvatar(
@@ -70,7 +71,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('MaBiblio'),
         actions: [
-          // Accéder au catalogue.
+          
           IconButton(
             icon: const Icon(Icons.menu_book),
             tooltip: 'Catalogue',
@@ -86,7 +87,20 @@ class _HomePageState extends State<HomePage> {
             },
           ),
 
-          // Q1.6 : accéder aux paramètres.
+          IconButton(
+            icon: const Icon(Icons.checklist),
+            tooltip: 'Ma liste',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MaListeScreen(),
+                ),
+              );
+            },
+          ),
+
+          
           IconButton(
             icon: const Icon(Icons.settings),
             tooltip: 'Paramètres',
