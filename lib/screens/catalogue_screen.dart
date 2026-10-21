@@ -1,20 +1,29 @@
 
 import 'package:flutter/material.dart';
 
-import '../models/livre.dart';
 import '../data/livres_data.dart';
+import '../models/livre.dart';
+import '../widgets/livre_card.dart';
+import 'detail_screen.dart';
 
 class CatalogueScreen extends StatelessWidget {
-  final Widget Function(Livre livre) livreTile;
+  const CatalogueScreen({super.key});
 
-  const CatalogueScreen({
-    super.key,
-    required this.livreTile,
-  });
+  
+  void _ouvrirDetail(BuildContext context, Livre livre) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailScreen(livre: livre),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final nouveautes = livres.where((livre) => livre.nouveaute).toList();
+    
+    final nouveautes =
+        livres.where((livre) => livre.nouveaute).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -23,7 +32,7 @@ class CatalogueScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
+          // Section Nouveautés
           const Padding(
             padding: EdgeInsets.all(12),
             child: Text(
@@ -35,6 +44,7 @@ class CatalogueScreen extends StatelessWidget {
             ),
           ),
 
+          
           SizedBox(
             height: 160,
             child: ListView.builder(
@@ -43,29 +53,20 @@ class CatalogueScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final livre = nouveautes[index];
 
-                return Container(
-                  width: 110,
-                  margin: const EdgeInsets.symmetric(horizontal: 6),
-                  padding: const EdgeInsets.all(8),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: livre.couleur,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    livre.titre,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                return SizedBox(
+                  width: 300,
+                  child: LivreCard(
+                    livre: livre,
+                    onTap: () {
+                      _ouvrirDetail(context, livre);
+                    },
                   ),
                 );
               },
             ),
           ),
 
-          
+          // Section de tous les livres.
           const Padding(
             padding: EdgeInsets.all(12),
             child: Text(
@@ -79,14 +80,16 @@ class CatalogueScreen extends StatelessWidget {
 
           
           Expanded(
-            child: ListView.separated(
+            child: ListView.builder(
               itemCount: livres.length,
               itemBuilder: (context, index) {
-                return livreTile(livres[index]);
-              },
-              separatorBuilder: (context, index) {
-                return const Divider(
-                  indent: 72,
+                final livre = livres[index];
+
+                return LivreCard(
+                  livre: livre,
+                  onTap: () {
+                    _ouvrirDetail(context, livre);
+                  },
                 );
               },
             ),

@@ -79,9 +79,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CatalogueScreen(
-                    livreTile: livreTile,
-                  ),
+                  builder: (context) => const CatalogueScreen(),
                 ),
               );
             },
