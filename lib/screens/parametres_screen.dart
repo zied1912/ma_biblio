@@ -48,14 +48,11 @@ class ParametresScreen extends StatelessWidget {
           subtitle: const Text('MaBiblio\nVersion 1.0'),
           trailing: const Icon(Icons.chevron_right),
 
-          // Q1.4 :
-          // dense: true réduit la hauteur du ListTile.
-          // isThreeLine: true adapte sa hauteur à trois lignes.
-          // enabled: false désactive les interactions.
+          
           isThreeLine: true,
         ),
 
-        // Q2.1 : éléments supplémentaires pour tester le défilement.
+        
         for (int i = 1; i <= 10; i++)
           ListTile(
             leading: const Icon(Icons.book),

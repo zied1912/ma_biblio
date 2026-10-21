@@ -114,7 +114,6 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
 
-      // Q1.7 : afficher temporairement les trois premiers livres.
       body: ListView(
         children: livres.take(3).map(livreTile).toList(),
       ),

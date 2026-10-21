@@ -66,7 +66,7 @@ class CatalogueScreen extends StatelessWidget {
             ),
           ),
 
-          // Section de tous les livres.
+          
           const Padding(
             padding: EdgeInsets.all(12),
             child: Text(
